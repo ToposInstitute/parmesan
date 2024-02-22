@@ -1,0 +1,73 @@
+{% extends 'concepts/base.html' %}
+
+{% load i18n static %}
+
+{% block description %}
+{% trans "About the Parmesan mathematical search system" %}
+{% endblock %}
+
+{% block author %}
+{% trans "Jacob Collard" %}
+{% endblock %}
+
+{% block title %}
+{% trans "About Parmesan" %}
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'concepts/css/search.css' %}?v=1.2">
+{% endblock %}
+
+{% block content %}
+<main role="main" class="container">
+  <h1 class="vertical-center">
+    {% trans "About Parmesan" %}
+  </h1>
+  <p>
+  {% blocktrans %}
+  Parmesan (PARsing Mathematical Entities Search And Navigation) is an
+  experimental search system for mathematical concepts, specifically in
+  category theory. The system was created in 2023 by Jacob Collard, Valeria de
+  Paiva, and Eswaran Subrahmanian. The basic idea behind it is that a newcomer
+  to the field may come across unfamiliar concepts and wish to find out more
+  about them. This isn't limited to just learning their definitions or proofs,
+  but also includes finding examples that highlight how they are used in real
+  mathematical texts.
+  {% endblocktrans %}
+  </p>
+
+  <p>
+  {% blocktrans %}
+  Parmesan has been presented at two scientific conferences: 
+  <a href="http://noisy-text.github.io/2022/">W-NUT 2022</a> and 
+  <a href="https://lexicala.com/4lr/">4LR 2023</a>. Correspondingly, we have
+  two preprints describing the functionality of Parmesan as well as our broader
+  findings on working with mathematical text. Both of these are available on
+  arXiv. 
+  {% endblocktrans %}
+  </p>
+
+  <ul>
+    <li>
+      Jacob Collard, Valeria de Paiva, Brendan Fong, and Eswaran Subrahmanian.
+      2022. Extracting Mathematical Concepts from Text. ArXiv preprint. 
+      <a href="https://arxiv.org/abs/2208.13830">2208.13830</a>.
+    </li>
+    <li>
+      Jacob Collard, Valeria de Paiva, Eswaran Subrahmanian.
+      2023. Parmesan: mathematical concept extraction for education. ArXiv
+      preprint. <a href="https://arxiv.org/abs/2307.06699">2307.06699</a>.
+    </li>
+  </ul>
+
+  <p>
+  {% blocktrans %}
+  The presentation at W-NUT 2022 is available as a recorded video, presented by
+  Jacob Collard. 
+  {% endblocktrans %}
+  </p>
+
+  <iframe style="display: block; margin: 1em auto;" width="650" height="400" src="https://www.youtube-nocookie.com/embed/-ZhZjMn1Zpk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+</main>
+{% endblock %}

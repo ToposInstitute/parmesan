@@ -1,0 +1,41 @@
+{% extends 'concepts/base.html' %}
+
+{% load i18n static %}
+
+{% block description %}
+{% trans "Search for mathematical concepts, definitions, and relations." %}
+{% endblock %}
+
+{% block author %}
+{% trans "Jacob Collard" %}
+{% endblock %}
+
+{% block title %}
+{% trans "Parmesan" %}
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'concepts/css/search.css' %}?v=1.2">
+{% endblock %}
+
+{% block content %}
+<main role="main" class="container">
+  <div class="center-form vertical-center">
+    <div class="text-center">
+      <div class="center-title">
+        <h1>&#x1f9c0; {% trans "Parmesan 0.2" %}</h1>
+        <h2 class="fs-5">PARsing Mathematical Entities Search And Navigation</h2>
+      </div>
+
+      <p>
+      Search the name of a mathematical concept to find information about its
+      definition and examples of usage.
+      </p>
+    </div>
+
+    <form action="{% url "concepts:search" %}" method="get">
+      {% include "concepts/search_form.html" with form=form %}
+    </form>
+  </div>
+</main>
+{% endblock %}

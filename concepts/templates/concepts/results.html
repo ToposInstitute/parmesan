@@ -1,0 +1,142 @@
+{% extends 'concepts/base.html' %}
+
+{% load i18n highlight static %}
+
+{% block description %}
+{% trans "Search for mathematical concepts, definitions, and relations." %}
+{% endblock %}
+
+{% block author %}
+{% trans "Jacob Collard" %}
+{% endblock %}
+
+{% block title %}
+{% trans "Parmesan | Search Results" %}
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'concepts/css/search.css' %}?v=1.2">
+{% endblock %}
+
+{% block content %}
+<main role="main" class="container">
+  <div class="center-form near-top">
+    <div class="text-center center-title">
+      <h1>&#x1f9c0; {% trans "Parmesan 0.2" %}</h1>
+    </div>
+    <form action="{% url "concepts:search" %}" method="get">
+      {% include "concepts/search_form.html" with form=form %}
+    </form>
+  </div>
+
+  {% if links %}
+    <div>
+      <h2>{% trans "Knowledge Base" %}</h2>
+      <p>
+      {% blocktrans %}
+      This is our best guess as to your search term's value in external
+      knowledge bases, such as <a href="https://wikidata.org">Wikidata</a> and 
+      <a href="https://ncatlab.org">nLab</a>.
+      {% endblocktrans %}
+      </p>
+      <div class="row row-cols-1 row-cols-sm-5 g-4">
+        {% for link in links %}
+          <div class="col">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a href="{{ link.source_url }}">
+                    {{ link.source_name|title }}
+                  </a>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  {{ link.source.name }}
+                </h6>
+                <p class="card-text">
+                  {{ link.definition }}
+                </p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  <hr/>
+
+  <h2>{% trans "Corpora" %}</h2>
+
+  <p>
+  {% blocktrans with query=query count total_count=total_count %}
+  Your search for "{{ query}}" produced <b>{{ total_count }}</b> total result.
+  {% plural %}
+  Your search for "{{ query }}" produced <b>{{ total_count }}</b> total results.
+  {% endblocktrans %}
+
+  {% blocktrans %}
+  These results are examples of use in key category theory datasets.
+  {% endblocktrans %}
+  </p>
+
+  <div class="accordion" id="search-results">
+    {% for result in results %}
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="collection-{{ forloop.counter }}">
+          <button class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collection-content-{{ forloop.counter }}"
+                  aria-expanded="false"
+                  aria-controls="collection-content-{{ forloop.counter }}">
+            {{ result.0.name }}
+            {% with result.2 as count %}
+            {% with result.1.documents|length as n %}
+              {% blocktrans with n=n count count=count %}
+              (displaying {{ n }} of {{ count }} result)
+              {% plural %}
+              (displaying {{ n }} of {{ count }} results)
+              {% endblocktrans %}
+            {% endwith %}
+            {% endwith %}
+          </button>
+        </h2>
+        <div id="collection-content-{{ forloop.counter }}"
+             class="accordion-collapse collapse"
+             aria-labelledby="collection-{{ forloop.counter }}"
+             data-bs-parent="#search-results">
+          <div class="accordion-body">
+            {% for query_result in result.1.get_documents %}
+              <div class="card search-result-card">
+                <div class="card-header">
+                  {% if query_result.document.url %}
+                    <a href="{{ query_result.document.url }}">
+                      {{ query_result.document.title }}
+                    </a>
+                  {% else %}
+                    {{ query_result.document.title }}
+                  {% endif %}
+                </div>
+                <div class="card-body">
+                  <p class="card-text">
+                    <ul>
+                      {% for sentence in query_result.sentences %}
+                        <li>
+                          {% highlight sentence query %}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                    {% comment %}
+                    {% highlight query_result.document.text with query html_tag "mark" %}
+                    {% endcomment %}
+                  </p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

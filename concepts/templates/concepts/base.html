@@ -1,0 +1,41 @@
+{% load bootstrap5 i18n static %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="{% block description %}{% endblock %}">
+    <meta name="author"
+          content="{% block author %}{% trans "Jacob Collard" %}{% endblock %}">
+
+    <title>{% block title %}{% trans "Parmesan" %}{% endblock %}</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    
+    {% block css %}
+    {% endblock %}
+  </head>
+
+  <body>
+    {% bootstrap_messages %}
+
+    {% include "concepts/navbar.html" %}
+
+    {% block content %}
+    {% endblock %}
+
+    <div class="container">
+      <footer class="py-3 my-4">
+        <p class="text-center text-muted border-top py-2">
+        Comments? Questions? 
+        <a href="mailto:valeria@topos.institute">Contact us</a>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{% load i18n %}
+
+<nav class="py-2 bg-light border-bottom">
+  <div class="container d-flex flex-wrap">
+    <ul class="nav me-auto">
+      <li class="nav-item">
+        <a href="{% url "concepts:index" %}"
+           class="nav-link link-dark px-2">
+          {% trans "Home" %}
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url "concepts:about" %}"
+           class="nav-link link-dark px-2">
+          {% trans "About" %}
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,14 @@
+server {
+	listen 80;
+	server_name parmesan.tech;
+
+	location = /favicon.ico { access_log off; log_not_found off; }
+	location /static/ {
+		root /home/django/parmesan;
+	}
+
+	location / {
+		include proxy_params;
+		proxy_pass http://unix:/run/parmesan.sock;
+	}
+}

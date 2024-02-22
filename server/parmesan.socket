@@ -1,0 +1,8 @@
+[Unit]
+Description=gunicorn socket for Parmesan
+
+[Socket]
+ListenStream=/run/parmesan.sock
+
+[Install]
+WantedBy=sockets.target
