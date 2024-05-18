@@ -1,3 +1,10 @@
+This repo contains the materials related to the paper 
+
+"Mathematical Entities: Corpora and Benchmarks"
+Jacob Collard, Valeria de Paiva, and Eswaran Subrahmanian
+
+to appear in COLING/LREC 2024
+
 Local Development Server
 ========================
 
