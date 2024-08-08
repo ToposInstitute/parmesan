@@ -10,7 +10,7 @@ cloudpathlib==0.16.0
 confection==0.1.4
 construct==2.5.3
 cymem==2.0.8
-Django==4.2.14
+Django==4.2.15
 django-bootstrap-v5==1.0.11
 django-haystack==3.2.1
 django-widget-tweaks==1.5.0
