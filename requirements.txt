@@ -28,7 +28,7 @@ psycopg2-binary==2.9.9
 pydantic==2.6.1
 pydantic_core==2.16.2
 python-ptrace==0.9.8
-requests==2.31.0
+requests==2.32.2
 six==1.16.0
 smart-open==6.4.0
 soupsieve==2.5
